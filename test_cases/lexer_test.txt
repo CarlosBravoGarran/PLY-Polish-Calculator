@@ -1,0 +1,11 @@
+# Test comment
++ 10 0b1010 0x1F 3.14
+- 255 0b1111 0xFA
+* 5.5 0xABC 0b1001
+/ 7 0b0 0x0
+
+''' This multiline comment
+should not appear in the output '''
+
+exp 2 log 8
+sin 1.57 cos 0
