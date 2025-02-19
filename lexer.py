@@ -27,13 +27,13 @@ def t_FLOAT(t):
 # Binary numbers
 def t_BINARY(t):
     r'0b[01]+'
-    t.value = int(t.value, 2)  # Convert to base 10
+    t.value = int(t.value, 2)
     return t
 
 # Hexadecimal numbers
 def t_HEXADECIMAL(t):
     r'0x[0-9A-F]+'
-    t.value = int(t.value, 16)  # Convert to base 10
+    t.value = int(t.value, 16)
     return t
 
 # Integer numbers
@@ -52,12 +52,10 @@ def t_MULTILINE_COMMENT(t):
     r"'''(.|\n)*?'''"
     t.lexer.lineno += t.value.count("\n")
 
-
 # Count lines 
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
-
 
 # Ignore spaces and tabs
 t_ignore = ' \t'
