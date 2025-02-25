@@ -91,4 +91,4 @@ def p_error(p):
     else:
         print(f"Syntax error at: {p}")
 
-parser = yacc.yacc(start='program')
+parser = yacc.yacc(debug=False)
