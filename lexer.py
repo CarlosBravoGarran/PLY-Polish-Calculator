@@ -7,7 +7,41 @@ tokens = (
     'EXP', 'LOG', 'SIN', 'COS', 'NEG'
 )
 
-# Regular expressions for simple tokens
+# Exclusive states for multiline comments
+states = (
+    ('comment', 'exclusive'),
+)
+
+# Single-line comments (# ...)
+def t_COMMENT(t):
+    r'\#.*'
+    pass  # Ignore everything after '#'
+
+# Multiline comments with '''
+def t_begin_comment(t):
+    r"'''"
+    t.lexer.begin('comment')
+
+def t_comment_content(t):
+    r'[^\'\n]+'
+    pass
+
+def t_comment_newline(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value)
+
+def t_comment_end(t):
+    r"'''"
+    t.lexer.begin('INITIAL')
+
+# Ignore spaces/tabs in 'comment' state
+t_comment_ignore = ' \t'
+
+def t_comment_error(t):
+    t.lexer.skip(1)
+
+
+# Tokens in the INITIAL state
 t_PLUS      = r'\+'
 t_MINUS     = r'-'
 t_MULTIPLY  = r'\*'
@@ -18,43 +52,26 @@ t_SIN       = r'sin'
 t_COS       = r'cos'
 t_NEG       = r'neg'
 
-# TOKENS
-# floating point numbers
 def t_FLOAT(t):
     r'\d+\.\d+'
     t.value = float(t.value)
     return t
 
-# Binary numbers
 def t_BINARY(t):
     r'0b[01]+'
     t.value = int(t.value, 2)
     return t
 
-# Hexadecimal numbers
 def t_HEXADECIMAL(t):
     r'0x[0-9A-F]+'
     t.value = int(t.value, 16)
     return t
 
-# Integer numbers
 def t_INTEGER(t):
     r'\d+'
     t.value = int(t.value)
     return t
 
-# Ignore single-line comments (# ...)
-def t_COMMENT(t):
-    r'\#.*'
-    pass 
-
-# Ignore multi-line comments (''' ... ''')
-def t_MULTILINE_COMMENT(t):
-    r"'''[\s\S]*?'''"
-    t.lexer.lineno += t.value.count("\n")
-    pass 
-
-# Count lines 
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
@@ -62,9 +79,9 @@ def t_newline(t):
 # Ignore spaces and tabs
 t_ignore = ' \t'
 
-# Lexical error handling
+# Error handling rule
 def t_error(t):
-    print(f"Illegal character: {t.value[0]} at line {t.lexer.lineno}")
+    print(f"Illegal character: {t.value[0]!r} at line {t.lexer.lineno}")
     t.lexer.skip(1)
 
 # Build the lexer

@@ -2,64 +2,93 @@ import ply.yacc as yacc
 import math
 from lexer import tokens
 
+# Operator precedence
 precedence = (
     ('right', 'NEG'),
     ('left', 'PLUS', 'MINUS'),
     ('left', 'MULTIPLY', 'DIVIDE'),
 )
 
+def p_program_empty(p):
+    '''
+    program :
+    '''
+    p[0] = []
+
+def p_program_expressions(p):
+    '''
+    program : program expression
+    '''
+    p[0] = p[1]
+    p[0].append(p[2])
+
+# Binary operators
 def p_expression_binop(p):
-    '''expression : PLUS expression expression
-                  | MINUS expression expression
-                  | MULTIPLY expression expression
-                  | DIVIDE expression expression'''
-    if p[1] == '+': p[0] = p[2] + p[3]
-    elif p[1] == '-': p[0] = p[2] - p[3]
-    elif p[1] == '*': p[0] = p[2] * p[3]
-    elif p[1] == '/': p[0] = p[2] / p[3] if p[3] != 0 else float('NaN')
+    '''
+    expression : PLUS expression expression
+               | MINUS expression expression
+               | MULTIPLY expression expression
+               | DIVIDE expression expression
+    '''
+    line = p.lineno(1)
+    if p[1] == '+':
+        val = p[2][1] + p[3][1]
+    elif p[1] == '-':
+        val = p[2][1] - p[3][1]
+    elif p[1] == '*':
+        val = p[2][1] * p[3][1]
+    elif p[1] == '/':
+        val = p[2][1] / p[3][1] if p[3][1] != 0 else float('nan')
+    p[0] = (line, val)
 
+# Function calls
 def p_expression_func(p):
-    '''expression : EXP expression
-                  | LOG expression
-                  | SIN expression
-                  | COS expression'''
-    if p[1] == 'exp': p[0] = math.exp(p[2])
-    elif p[1] == 'log': p[0] = math.log(p[2]) if p[2] > 0 else float('NaN')
-    elif p[1] == 'sin': p[0] = math.sin(p[2])
-    elif p[1] == 'cos': p[0] = math.cos(p[2])
+    '''
+    expression : EXP expression
+               | LOG expression
+               | SIN expression
+               | COS expression
+    '''
+    line = p.lineno(1)
+    if p[1] == 'exp':
+        val = math.exp(p[2][1])
+    elif p[1] == 'log':
+        val = math.log(p[2][1]) if p[2][1] > 0 else float('nan')
+    elif p[1] == 'sin':
+        val = math.sin(p[2][1])
+    elif p[1] == 'cos':
+        val = math.cos(p[2][1])
+    p[0] = (line, val)
 
+# Number literals
 def p_expression_number(p):
-    '''expression : INTEGER
-                  | FLOAT
-                  | BINARY
-                  | HEXADECIMAL'''
-    p[0] = p[1] 
+    '''
+    expression : INTEGER
+               | FLOAT
+               | BINARY
+               | HEXADECIMAL
+    '''
+    line = p.lineno(1)
+    p[0] = (line, p[1])
 
+# Unary minus operator
 def p_expression_neg(p):
-    '''expression : NEG expression'''
+    '''
+    expression : NEG expression
+    '''
+    line = p.lineno(1)
     if p[2] is not None:
-        p[0] = -p[2]
+        val = -p[2][1]
     else:
-        print("Error: 'neg' recibió un valor inválido.")
-        p[0] = float('nan')
+        print("Error: 'neg' received an invalid value.")
+        val = float('nan')
+    p[0] = (line, val)
 
-
-def p_empty(p):
-    '''expression :'''
-    p[0] = None
-
-
+# Error rule for syntax errors
 def p_error(p):
-    print(f"Error de sintaxis en la entrada: {p}")
+    if p is None:
+        print("Syntax error: unexpected end of file")
+    else:
+        print(f"Syntax error at: {p}")
 
-parser = yacc.yacc()
-
-def test_parser(filename):
-    with open(filename, 'r') as file:
-        for line in file:
-            line = line.strip()
-            result = parser.parse(line)
-            print(f"Entrada: {line} → Resultado: {result}")
-
-if __name__ == "__main__":
-    test_parser("test_cases/parser_test.txt")
+parser = yacc.yacc(start='program')

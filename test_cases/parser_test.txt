@@ -1,49 +1,54 @@
-# Pruebas básicas de operadores
+# Basic operator tests
 + 3 4
 - 10 5
 * 2 8
 / 20 4
 
-# Pruebas con números flotantes
+# Tests with floating point numbers
 + 1.5 2.5
 - 10.0 3.5
 * 2.3 4.1
 / 9.0 3.0
 
-# Pruebas con números binarios
+# Tests with binary numbers
 + 0b1010 0b0101
 - 0b1111 0b0001
 * 0b100 0b011
 / 0b1100 0b0100
 
-# Pruebas con números hexadecimales (deben ser en mayúscula)
+# Tests with hexadecimal numbers (must be uppercase)
 + 0xA 0x5
 - 0xF 0x1
 * 0x4 0x3
 / 0xC 0x4
 
-# Pruebas con operadores científicos
+# Tests with scientific operators
 exp 1
 log 10
 sin 0
 cos 3.1416
 
-# Pruebas con el operador unario neg
+# Tests with unary operator neg
 neg 5
 neg 0b1010
 neg 0xA
 neg 3.14
 
-# Pruebas combinadas
+# Combined tests
 + neg 5 3
 - 10 neg 2
 * neg 4 2
 / 20 neg 4
 
-# Pruebas con comentarios
-# Este comentario debe ser ignorado
-+ 3 3  # Esto es una suma con comentario
+# Tests with comments
+# This comment should be ignored
++ 3 3  # This is a sum with a comment
 
-# Pruebas con casos extremos
-/ 1 0  # División por cero, debería dar NaN
-log neg 1 # Logaritmo de número negativo, debería dar NaN
+'''
+This multiline comment
+should be ignored
+'''
+
+# Tests with edge cases
+/ 1 0  # Division by zero, should return NaN
+log neg 1 # Logarithm of a negative number, should return NaN
