@@ -4,7 +4,7 @@ import ply.lex as lex
 tokens = (
     'FLOAT', 'BINARY', 'HEXADECIMAL', 'INTEGER',
     'PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE',
-    'EXP', 'LOG', 'SIN', 'COS'
+    'EXP', 'LOG', 'SIN', 'COS', 'NEG'
 )
 
 # Regular expressions for simple tokens
@@ -16,6 +16,7 @@ t_EXP       = r'exp'
 t_LOG       = r'log'
 t_SIN       = r'sin'
 t_COS       = r'cos'
+t_NEG       = r'neg'
 
 # TOKENS
 # floating point numbers
@@ -49,8 +50,9 @@ def t_COMMENT(t):
 
 # Ignore multi-line comments (''' ... ''')
 def t_MULTILINE_COMMENT(t):
-    r"'''(.|\n)*?'''"
+    r"'''[\s\S]*?'''"
     t.lexer.lineno += t.value.count("\n")
+    pass 
 
 # Count lines 
 def t_newline(t):
