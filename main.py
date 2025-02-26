@@ -1,3 +1,11 @@
+'''**************************************************************************'''
+'''                                                                          '''
+'''    main.py                                                               '''
+'''                                                                          '''
+'''    By: carlosbravo && lgandarillas @ Procesadores del Lenguaje UC3M      '''
+'''                                                                          '''
+'''**************************************************************************'''
+
 import sys
 from lexer import lexer
 from parser import parser

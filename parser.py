@@ -1,3 +1,11 @@
+'''**************************************************************************'''
+'''                                                                          '''
+'''    parser.py                                                             '''
+'''                                                                          '''
+'''    By: carlosbravo && lgandarillas @ Procesadores del Lenguaje UC3M      '''
+'''                                                                          '''
+'''**************************************************************************'''
+
 import ply.yacc as yacc
 import math
 from lexer import tokens
