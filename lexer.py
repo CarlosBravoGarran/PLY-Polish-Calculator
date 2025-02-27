@@ -11,8 +11,8 @@ import ply.lex as lex
 # List of tokens
 tokens = (
     'FLOAT', 'BINARY', 'HEXADECIMAL', 'INTEGER',
-    'PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE',
-    'EXP', 'LOG', 'SIN', 'COS', 'NEG'
+    'INF', 'NAN', 'PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE',
+    'EXP', 'LOG', 'SIN', 'COS', 'NEG', 'MEMORY', 'EQUALS'
 )
 
 # Exclusive states for multiline comments
@@ -59,6 +59,8 @@ t_LOG       = r'log'
 t_SIN       = r'sin'
 t_COS       = r'cos'
 t_NEG       = r'neg'
+t_EQUALS    = r'='
+
 
 def t_FLOAT(t):
     r'\d+\.\d+'
@@ -78,6 +80,23 @@ def t_HEXADECIMAL(t):
 def t_INTEGER(t):
     r'\d+'
     t.value = int(t.value)
+    return t
+
+# Infinity
+def t_INF(t):
+    r'inf'
+    t.value = float('inf')
+    return t
+
+# NaN (Not a Number)
+def t_NAN(t):
+    r'nan'
+    t.value = float('nan')
+    return t
+
+# Memory variable
+def t_MEMORY(t):
+    r'\{MEMORY\}'
     return t
 
 def t_newline(t):

@@ -92,6 +92,27 @@ def p_expression_neg(p):
         val = float('nan')
     p[0] = (line, val)
 
+# Infinity and NaN
+def p_expression_inf_nan(p):
+    '''expression : INF
+                  | NAN'''
+    line = p.lineno(1)
+    p[0] = (line, p[1])
+
+
+memory = 0
+
+def p_assignment(p):
+    '''expression : MEMORY EQUALS expression'''
+    global memory
+    memory = p[3][1]
+    p[0] = (p.lineno(1), memory)
+
+def p_expression_memory(p):
+    '''expression : MEMORY'''
+    global memory
+    p[0] = (p.lineno(1), memory)
+
 # Error rule for syntax errors
 def p_error(p):
     if p is None:
