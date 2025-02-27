@@ -1,0 +1,9 @@
+# Esto es un comentario
++ 3 5  # Suma con comentario
+- 10 4
+'''
+Esto es un comentario multilínea
+de varias líneas que no debe afectar el análisis.
+'''
+* 2 8
+/ 9 3

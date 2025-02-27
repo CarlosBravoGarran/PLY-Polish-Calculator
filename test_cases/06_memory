@@ -1,0 +1,3 @@
+{MEMORY} = 10
+* {MEMORY} 3
++ {MEMORY} {MEMORY}

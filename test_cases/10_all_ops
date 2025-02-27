@@ -1,0 +1,8 @@
+{MEMORY} = + sin 0xA cos 0b101
++ log 0x10 exp 0b1 {MEMORY}
+- * sin 0b11 cos 0x3 NEG 0b10
+/ exp 0x2 log 0b100 {MEMORY}
++ * sin 0b10 cos 0x2 - log 0b100 exp 0x1 / {MEMORY} 2
+- * log 0x20 NEG 0b1010 exp {MEMORY}
+NEG + / sin 0b11 cos 0xA log 0b10
++ / {MEMORY} inf * nan 0b1

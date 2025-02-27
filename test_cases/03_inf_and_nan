@@ -1,0 +1,8 @@
+* inf 1
+- inf inf
+/ 1 0
+log -5
++ nan 5
+- 10 nan
+* nan 3
+/ nan 2

@@ -1,0 +1,6 @@
+neg 5
+neg 10
++ neg 3 2
+- 10 neg 4
+* neg 4 7
+/ neg 50 neg 5
