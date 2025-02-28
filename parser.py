@@ -116,7 +116,7 @@ def p_expression_memory(p):
 # Error rule for syntax errors
 def p_error(p):
     if p is None:
-        print("Syntax error: unexpected end of file")
+        print("Syntax error: Incomplete expression, unexpected end of input.")
     else:
         print(f"Syntax error at: {p}")
 
