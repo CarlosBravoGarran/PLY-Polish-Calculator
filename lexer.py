@@ -5,7 +5,7 @@
 '''    By: carlosbravo && lgandarillas @ Procesadores del Lenguaje UC3M      '''
 '''                                                                          '''
 '''**************************************************************************'''
-
+import sys
 import ply.lex as lex
 
 # List of tokens
@@ -113,3 +113,23 @@ def t_error(t):
 
 # Build the lexer
 lexer = lex.lex()
+
+# Test the lexer
+def test_lexer(data):
+    lexer.input(data)
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break
+        print(tok)
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        sys.exit("Usage: python lexer.py <filename>")
+    filename = sys.argv[1]
+    try:
+        with open(filename, 'r') as f:
+            data = f.read()
+    except Exception as e:
+        sys.exit(f"Error: {e}")
+    test_lexer(data)

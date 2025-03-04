@@ -10,13 +10,6 @@ import ply.yacc as yacc
 import math
 from lexer import tokens
 
-# Operator precedence
-precedence = (
-    ('right', 'NEG'),
-    ('left', 'PLUS', 'MINUS'),
-    ('left', 'MULTIPLY', 'DIVIDE'),
-)
-
 def p_program_empty(p):
     '''
     program :
