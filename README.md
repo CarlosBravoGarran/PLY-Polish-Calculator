@@ -56,29 +56,31 @@ python src/main.py test/01_basic_operations
 ```
 
 ## Project Structure
-.<br>
-├── requirements.txt              # Dependencies<br>
-├── README.md                     # Project documentation<br>
-├── docs/<br>
-│   ├── P1-Subject-PDL-2025.pdf   # Project description document<br>
-├── src/<br>
-│   ├── lexer.py                  # Lexical analyzer<br>
-│   ├── parser.py                 # Syntactic analyzer<br>
-│   ├── main.py                   # Main entry point<br>
-├── test/<br>
-│   ├── 01_basic_operations       # Test cases for basic operations<br>
-│   ├── 02_math_functions         # Test cases for math functions<br>
-│   ├── 03_inf_and_nan            # Test cases for infinity and NaN<br>
-│   ├── 04_negation               # Test cases for unary negation<br>
-│   ├── 05_bin_and_hex            # Test cases for binary/hex numbers<br>
-│   ├── 06_memory                 # Test cases for memory variable<br>
-│   ├── 07_combined_ops           # Mixed operations test cases<br>
-│   ├── 08_function_ops           # Function operations test cases<br>
-│   ├── 09_comments               # Test cases for comments<br>
-│   ├── 10_all_ops                # Comprehensive test cases<br>
-│   ├── 11_lexic_errors           # Lexical error tests<br>
-│   ├── 12_syntax_erros           # Syntax error tests<br>
-│   ├── 13_syntax_error_empty_neg # Test cases for empty negation<br>
-│   ├── 14_syntax_error_empty_func # Test cases for empty functions<br>
-│   ├── 15_syntax_error_invalid_op # Test cases for invalid operators<br>
-│   ├── 16_empty_file             # Test for empty files<br>
+```bash
+.
+├── requirements.txt                # Dependencies
+├── README.md                       # Project documentation
+├── docs/
+│   ├── P1-Subject-PDL-2025.pdf     # Project description document
+├── src/
+│   ├── lexer.py                    # Lexical analyzer
+│   ├── parser.py                   # Syntactic analyzer
+│   ├── main.py                     # Main entry point
+├── test/
+│   ├── 01_basic_operations         # Test cases for basic operations
+│   ├── 02_math_functions           # Test cases for math functions
+│   ├── 03_inf_and_nan              # Test cases for infinity and NaN
+│   ├── 04_negation                 # Test cases for unary negation
+│   ├── 05_bin_and_hex              # Test cases for binary/hex numbers
+│   ├── 06_memory                   # Test cases for memory variable
+│   ├── 07_combined_ops             # Mixed operations test cases
+│   ├── 08_function_ops             # Function operations test cases
+│   ├── 09_comments                 # Test cases for comments
+│   ├── 10_all_ops                  # Comprehensive test cases
+│   ├── 11_lexic_errors             # Lexical error tests
+│   ├── 12_syntax_erros             # Syntax error tests
+│   ├── 13_syntax_error_empty_neg   # Test cases for empty negation
+│   ├── 14_syntax_error_empty_func  # Test cases for empty functions
+│   ├── 15_syntax_error_invalid_op  # Test cases for invalid operators
+│   ├── 16_empty_file               # Test for empty files
+```
