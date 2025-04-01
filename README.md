@@ -50,7 +50,7 @@ source venv/bin/activate
 ```bash
 pip install -r requirements.txt
 ```
-### 4. 5. Run the Interpreter
+### 4. Run the Interpreter
 ```bash
 python src/main.py test/01_basic_operations
 ```
